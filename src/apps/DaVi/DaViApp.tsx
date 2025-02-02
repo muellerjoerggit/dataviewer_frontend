@@ -1,4 +1,4 @@
-import {createContext, useReducer, useState} from "react";
+import {useReducer, useState} from "react";
 import {changeFilter, changePaginationHook} from "@/hooks/filterReducer.ts";
 import {useFetchSearchExtEntityOverview} from "@/hooks/useFetchSearchExtEntityOverview.ts";
 import useGetEntity from "@/hooks/useGetEntity.ts";
@@ -13,29 +13,11 @@ import EntityModal from "@/components/EntityModal.tsx";
 import ItemList from "@/components/items/ItemList.tsx";
 
 import {Entity, EntityList} from "@/features/entity/entityTypes.ts";
-import {FilterData} from "@/features/filter/filterTypes.ts";
 import {emptyFilterData} from "@/features/filter/filterConstants.ts";
 import {emptyEntity} from "@/features/entity/entityConstants.ts";
-
-type FilterContextType = {
-  filterData: FilterData
-  filterDispatcherCallback: ((action: any) => void)
-};
-
-type EntityContextType = {
-  showEntityCallback: ((entityKey: string, reload?: boolean) => void),
-  reloadEntityCallback: (() => void)
-}
-
-export const ClientContext = createContext<string>('');
-export const FilterContext = createContext<FilterContextType>({
-  filterData: emptyFilterData,
-  filterDispatcherCallback: () => {}
-});
-export const EntityContext = createContext<EntityContextType>({
-  showEntityCallback: () => {},
-  reloadEntityCallback: () => {}
-})
+import EntityFilterWrapper from "@/components/EntityFilterWrapper.tsx";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import EntityActions from "@/features/entityAction/EntityActions.tsx";
 
 export default function DaViApp() {
   const [currentEntityType, setCurrentEntityTypeState] = useState<string>('');
@@ -92,43 +74,66 @@ export default function DaViApp() {
   }
 
   return (
-    <ClientContext.Provider value={selectedClient}>
-      <main className="grid grid-cols-1 h-full w-full mt-4 mr-4">
-        <div>
-          <ClientChooser
-            handleChange={setClient}
+    <main className="grid grid-cols-1 h-full w-full mt-4 mr-4">
+      <div>
+        <ClientChooser
+          handleChange={setClient}
+          selectedClient={selectedClient}
+        />
+
+        <EntityFilterWrapper filterData={filterData} filterDispatcher={filterDispatcher} selectedClient={selectedClient}>
+          <EntityTypeChooser
+            currentEntityType={currentEntityType}
+            setEntityType={setCurrentEntityType}
           />
 
-          <FilterContext.Provider value={{filterData: filterData, filterDispatcherCallback: filterDispatcher}}>
-            <EntityTypeChooser
-              currentEntityType={currentEntityType}
-              setEntityType={setCurrentEntityType}
-            />
+          <FilterModal
+            searchEntities={searchEntities}
+          />
+        </EntityFilterWrapper>
 
-            <FilterModal
-              searchEntities={searchEntities}
-            />
-          </FilterContext.Provider>
+        <Button className="ml-4" type="button" onClick={searchEntities}>Suchen</Button>
 
-          <Button className="ml-4" type="button" onClick={searchEntities}>Suchen</Button>
-
-          <EntityContext.Provider value={{showEntityCallback: showEntity, reloadEntityCallback: reloadEntity}} >
-            <EntityModal openModal={openEntityModal} setOpenModal={setOpenEntityModal}>
+        <EntityModal
+          openModal={openEntityModal}
+          entity={entity}
+          bookmarks={bookmarks}
+          setBookmarksCallback={setBookmarks}
+          setOpenModal={setOpenEntityModal}
+          showEntityCallback={showEntity}
+          reloadEntityCallback={reloadEntity}
+        >
+          <Tabs defaultValue="fields">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="overview">Überblick</TabsTrigger>
+              <TabsTrigger value="fields">Datenfelder</TabsTrigger>
+              {/*<TabsTrigger value="logs">Logs*/}
+              {/*  <Badge className="ml-2 bg-red-700">{entity.logsByLevel.critical.length + entity.logsByLevel.error.length}</Badge>*/}
+              {/*  <Badge className="ml-2 bg-yellow-400 text-foreground">{entity.logsByLevel.warning.length + entity.logsByLevel.notice.length}</Badge>*/}
+              {/*  <Badge className="ml-2" variant="outline">{entity.logsByLevel.info.length + entity.logsByLevel.debug.length}</Badge>*/}
+              {/*</TabsTrigger>*/}
+            </TabsList>
+            <TabsContent value="overview">
+              <EntityActions entity={entity} loading={loading}/>
+            </TabsContent>
+            <TabsContent value="fields">
               <ItemList
                 entity={entity}
                 loading={loading}
-                bookmarks={bookmarks}
-                setBookmarksCallback={setBookmarks}
               />
-            </EntityModal>
-          </EntityContext.Provider>
-        </div>
-        <div className="mt-4 mr-4">
-          <EntityMain
-            entityListComponent={entityTableComponent()}
-          />
-        </div>
-      </main>
-    </ClientContext.Provider>
+            </TabsContent>
+            {/*<TabsContent value="logs">*/}
+            {/*  <div className="ml-4">*/}
+            {/*    {renderLogItems()}*/}
+            {/*  </div>*/}
+            {/*</TabsContent>*/}
+          </Tabs>
+        </EntityModal>
+
+      </div>
+      <div className="mt-4 mr-4">
+        <EntityMain entityListComponent={entityTableComponent()}/>
+      </div>
+    </main>
   )
 }

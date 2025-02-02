@@ -8,32 +8,54 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {createContext, ReactNode} from "react";
+import Bookmark from "@/components/Bookmark.tsx";
+import ReloadIcon from "@/components/icons/ReloadIcon.tsx";
+import {Entity} from "@/features/entity/entityTypes.ts";
 
+type EntityContextType = {
+  showEntityCallback: ((entityKey: string, reload?: boolean) => void),
+  reloadEntityCallback: (() => void)
+}
 
-export default function EntityModal({
-  children: children,
-  openModal: openModal,
-  setOpenModal: setOpenModal
-}) {
+type Props = {
+  entity: Entity,
+  bookmarks: Array<string>,
+  setBookmarksCallback: ((bookmarks: Array<string>) => void),
+  openModal: boolean,
+  setOpenModal: (open: boolean) => void,
+  showEntityCallback: ((entityKey: string, reload?: boolean) => void),
+  reloadEntityCallback: (() => void),
+  children: ReactNode | ReactNode[],
+}
+
+export const EntityContext = createContext<EntityContextType>({
+  showEntityCallback: () => {},
+  reloadEntityCallback: () => {}
+})
+
+export default function EntityModal({entity, bookmarks, setBookmarksCallback, openModal, setOpenModal, showEntityCallback, reloadEntityCallback, children}: Props) {
 
   return (
-    <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger asChild>
-        <Button className="ml-2" variant="outline">Entität anzeigen</Button>
-      </DialogTrigger>
-      <DialogContent className="flex flex-col max-w-[90%] h-[95%] m-auto !overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>Entität</DialogTitle>
-        </DialogHeader>
-        {children}
-        <DialogFooter className="mt-auto sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Schließen
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <EntityContext.Provider value={{showEntityCallback: showEntityCallback, reloadEntityCallback: reloadEntityCallback}}>
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
+        <DialogTrigger asChild>
+          <Button className="ml-2" variant="outline">Entität anzeigen</Button>
+        </DialogTrigger>
+        <DialogContent className="flex flex-col max-w-[90%] h-[95%] m-auto !overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Entität: {entity.label}</DialogTitle>
+          </DialogHeader>
+          {children}
+          <DialogFooter className="mt-auto sm:justify-start">
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">Schließen</Button>
+            </DialogClose>
+            <Bookmark entityKey={entity.entityKey} bookmarks={bookmarks} setBookmarksCallback={setBookmarksCallback} />
+            <Button variant="secondary" onClick={() => reloadEntityCallback()}><ReloadIcon/><span className="ml-2">Neu Laden</span></Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </EntityContext.Provider>
   )
 }

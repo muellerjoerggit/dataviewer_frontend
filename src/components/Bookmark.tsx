@@ -25,8 +25,6 @@ export default function Bookmark({entityKey, bookmarks, setBookmarksCallback}: p
   }
 
   return (
-    <Button variant="ghost" onClick={() => toggleBookmark()}>
-      <BookmarkIcon className={isBookmarked() ? 'text-yellow-400' : ''}/>
-    </Button>
+    <Button variant="secondary" onClick={() => toggleBookmark()}><BookmarkIcon className={isBookmarked() ? 'text-yellow-400 mr-2' : 'mr-2'}/> Lesezeichen</Button>
   )
 }

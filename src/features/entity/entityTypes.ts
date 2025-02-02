@@ -1,6 +1,7 @@
 import {EntityOverviewType, Item} from '@/features/property/propertyTypes.ts'
 import {LogLevels} from '@/features/logging/logTypes.ts'
 import {SqlFilterDefinition} from "@/features/filter/filterTypes.ts";
+import {EntityAction} from "@/features/entityAction/entityActionTypes.ts";
 
 
 export interface EntityType {
@@ -37,9 +38,3 @@ export interface Entity {
   entityActions: Array<EntityAction>
 }
 
-export interface EntityAction {
-  component: string,
-  entityType: string,
-  entityAction: string,
-  data: any
-}

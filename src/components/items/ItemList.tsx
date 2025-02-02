@@ -1,34 +1,24 @@
 import {Item} from "@/features/property/propertyTypes.ts";
 import {Entity} from "@/features/entity/entityTypes.ts";
-import {useContext, useMemo, useState} from "react";
-import {Button} from "@/components/ui/button.tsx";
+import {useMemo, useState} from "react";
 import ThrobbedIcon from "@/components/icons/ThrobbedIcon.tsx";
-import ReloadIcon from "@/components/icons/ReloadIcon.tsx";
 import ItemWrapper from "@/components/items/ItemWrapper.tsx";
 import ItemErrorBadges from "@/components/ItemErrorBadges.tsx";
 import ItemFilterSwitches from "@/components/ItemFilterSwitches.tsx";
-import {EntityContext} from "@/apps/DaVi/DaViApp.tsx";
-import Bookmark from "@/components/Bookmark.tsx";
 
 type ItemListProps = {
-  entity: Entity
-  bookmarks: Array<string>,
-  setBookmarksCallback: ((bookmarks: Array<string>) => void)
+  entity: Entity,
   loading: boolean
 }
 
 export default function ItemList({
   entity,
-  bookmarks,
-  setBookmarksCallback,
   loading
 }: ItemListProps) {
 
   const [hideDeprecated, setHideDeprecatedState] = useState<boolean>(true);
   const [hideNullItems, setHideNullItemsState] = useState<boolean>(false);
   const [searchPropertyInput, setSearchPropertyInput] = useState<string>('');
-
-  const {reloadEntityCallback: reloadEntity} = useContext(EntityContext);
 
   const properties: Array<Item> = useMemo(() => entity.properties.filter(
     (property: Item)=> {
@@ -94,8 +84,6 @@ export default function ItemList({
         />
         <div>
           <ItemFilterSwitches hideDeprecated={hideDeprecated} setHideDeprecated={setHideDeprecated} hideNullItems={hideNullItems} setHideNullItems={setHideNullItems} />
-          <Bookmark entityKey={entity.entityKey} bookmarks={bookmarks} setBookmarksCallback={setBookmarksCallback} />
-          <Button variant="ghost" onClick={() => reloadEntity()}><ReloadIcon/></Button>
         </div>
       </div>
       <hr className="mt-3 mb-3"/>
