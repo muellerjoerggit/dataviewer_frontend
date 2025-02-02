@@ -1,6 +1,6 @@
 import {EntityReferenceType} from "@/features/property/propertyTypes.ts";
 import {useContext} from "react";
-import {EntityContext} from "@/apps/DaVi/DaViApp.tsx";
+import {EntityContext} from "@/components/EntityModal.tsx";
 import EyeIcon from "@/components/icons/EyeIcon.tsx";
 
 type props = {

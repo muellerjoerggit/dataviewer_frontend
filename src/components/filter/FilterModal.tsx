@@ -12,11 +12,11 @@ import {
 
 import {useContext, useState} from "react";
 import FilterGroupList from "@/components/filter/FilterGroupList.tsx";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {ACTION_RESET_FILTER} from "@/features/filter/filterConstants.ts";
 
 type props = {
-  searchEntities: Function
+  searchEntities?: Function,
 }
 
 export default function FilterModal({searchEntities}: props) {
@@ -24,6 +24,19 @@ export default function FilterModal({searchEntities}: props) {
   const {filterData: filterData, filterDispatcherCallback: filterDispatcher} = useContext(FilterContext);
 
   const readonly: boolean = Object.keys(filterData.filterDefinitions).length === 0;
+
+  function buildButton() {
+    if(searchEntities) {
+      return (
+        <Button type="button" onClick={() => {
+          setFilterDialogOpen(false);
+          searchEntities();
+        }}>
+          Suchen
+        </Button>
+      )
+    }
+  }
 
   function buildFilterGroups() {
     if (readonly === undefined || readonly) return;
@@ -49,12 +62,7 @@ export default function FilterModal({searchEntities}: props) {
         </DialogHeader>
         {buildFilterGroups()}
         <DialogFooter className="mt-auto sm:justify-start">
-          <Button type="button" onClick={() => {
-            setFilterDialogOpen(false);
-            searchEntities();
-          }}>
-            Suchen
-          </Button>
+          {buildButton()}
           <Button type="button" variant="secondary" onClick={() => {
             filterDispatcher({type: ACTION_RESET_FILTER})
           }}>

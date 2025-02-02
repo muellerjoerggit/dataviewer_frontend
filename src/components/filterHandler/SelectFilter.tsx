@@ -4,7 +4,7 @@ import {Command, CommandGroup, CommandItem, CommandList} from "@/components/ui/c
 import {Button} from "@/components/ui/button.tsx";
 import {Badge} from "@/components/ui/badge"
 import {FilterType, OptionItem} from "@/features/filter/filterTypes.ts";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {
   ACTION_ADD_OPTION_ITEM,
   ACTION_REMOVE_FILTER,

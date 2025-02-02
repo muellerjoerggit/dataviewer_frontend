@@ -1,6 +1,6 @@
 import FilterGroup from "@/components/filter/FilterGroup.tsx";
 import {useContext} from "react";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {WITHOUT_FILTER_GROUP} from "@/features/filter/filterConstants.ts";
 import FilterWrapper from "@/components/filter/FilterWrapper.tsx";
 

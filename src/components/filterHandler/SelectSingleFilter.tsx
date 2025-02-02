@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 
 import {OptionItem} from "@/features/filter/filterTypes.ts";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {ACTION_SET_OPTION_ITEM, FILTER_DATA_TYPE_OPTION,} from "@/features/filter/filterConstants.ts";
 
 
@@ -12,8 +12,8 @@ type props = {
 }
 
 export default function SelectSingleFilter({
-                                             filterName
-                                           }: props): JSX.Element {
+ filterName
+}: props): JSX.Element {
 
   const {filterData: filterData, filterDispatcherCallback: filterDispatcher} = useContext(FilterContext);
   const filterDefinition = filterData.filterDefinitions[filterName];

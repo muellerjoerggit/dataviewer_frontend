@@ -9,7 +9,7 @@ import OptionsFilter from "@/components/filterHandler/OptionsFilter.tsx";
 import SelectSingleFilter from "@/components/filterHandler/SelectSingleFilter.tsx";
 
 import {useContext} from "react";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {
   FILTER_CHECKBOX,
   FILTER_DATE_TIME,

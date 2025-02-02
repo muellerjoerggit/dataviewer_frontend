@@ -7,7 +7,7 @@ import {Command, CommandGroup, CommandItem, CommandList} from "@/components/ui/c
 import {useContext, useState} from "react";
 import {useFetchEntityTypes} from "@/hooks/useFetchEntityTypes.ts";
 import {ACTION_SET_FILTER_DEFINITIONS} from "@/features/filter/filterTypes.ts";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 
 type props = {
   currentEntityType: string,

@@ -4,7 +4,7 @@ import {Input} from "@/components/ui/input";
 import {FilterType} from "@/features/filter/filterTypes.ts";
 import {ACTION_ADD_IN_FILTER, ACTION_REMOVE_FILTER, FILTER_DATA_TYPE_IN} from "@/features/filter/filterConstants.ts";
 import {useContext} from "react";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 
 type props = {
   filterName: string,

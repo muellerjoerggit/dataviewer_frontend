@@ -6,7 +6,7 @@ export function useFetchEntityTypes() {
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    fetch('/api/get-entity-types')
+    fetch('/api/entityTypes')
       .then((res) => {
         if (!res.ok) {
           throw Error(res.statusText);

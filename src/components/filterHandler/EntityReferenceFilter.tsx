@@ -12,7 +12,7 @@ import {
   ACTION_REMOVE_ENTITY_ITEM,
   ACTION_REMOVE_FILTER, FILTER_ENTITY_REFERENCE
 } from "@/features/filter/filterConstants.ts";
-import {ClientContext, FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext, ClientContext} from "@/components/EntityFilterWrapper.tsx";
 import {FILTER_DATA_TYPE_REFERENCE, FilterType} from "@/features/filter/filterTypes.ts";
 import useGetEntity from "@/hooks/useGetEntity.ts";
 import XMarkIcon from "@/components/icons/XMarkIcon.tsx";

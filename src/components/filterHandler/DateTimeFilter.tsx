@@ -5,7 +5,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import DateChangeButtons from "@/components/DateChangeButtons.tsx";
 import {FilterType} from "@/features/filter/filterTypes.ts";
 import {ACTION_ADD_DATE_FILTER} from "@/features/filter/filterConstants.ts";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 
 const FILTER_TYPE_EXACT = "1";
 const FILTER_TYPE_BEFORE = "2";

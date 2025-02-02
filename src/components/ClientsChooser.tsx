@@ -1,21 +1,17 @@
 // @ts-nocheck
 import useFetchClients from "@/hooks/useFetchClients.ts";
 import {cn} from "@/lib/utils.ts";
-import {useContext, useEffect} from "react";
-import {ClientContext} from "@/apps/DaVi/DaViApp.tsx";
+import {useEffect} from "react";
 
 type props = {
-  handleChange: Function,
+  handleChange: Function
+  selectedClient: string
   className?: string
 }
 
-export default function ClientChooser({
-                                        handleChange: handleChange,
-                                        className: className
-                                      }: props) {
+export default function ClientChooser({handleChange, selectedClient, className}: props) {
 
   const [clients, isPending, error] = useFetchClients();
-  const selectedClient = useContext(ClientContext);
 
   useEffect(() => {
     if (selectedClient === '' && clients !== undefined) {

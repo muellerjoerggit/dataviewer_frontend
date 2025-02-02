@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import FilterWrapper from "@/components/filter/FilterWrapper.tsx";
 
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {ACTION_REMOVE_FILTER, FilterGroupType} from "@/features/filter/filterTypes.ts";
 import {
   ACTION_DELETE_FILTER_OF_GROUP,

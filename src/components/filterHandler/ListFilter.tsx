@@ -1,7 +1,7 @@
 import {cn} from "@/lib/utils.ts";
 import {FilterType} from "@/features/filter/filterTypes.ts";
 import {useContext} from "react";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {ACTION_ADD_LIST_FILTER, ACTION_REMOVE_FILTER, FILTER_DATA_TYPE_LIST} from "@/features/filter/filterConstants.ts";
 
 type props = {

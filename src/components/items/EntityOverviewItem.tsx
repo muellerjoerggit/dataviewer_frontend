@@ -40,6 +40,7 @@ export default function EntityOverviewItemComponent({propertyData}: props): JSX.
       <Table>
         <TableHeader>
           <TableRow>
+            <TableCell key="show" />
             {buildHeader()}
           </TableRow>
         </TableHeader>

@@ -5,7 +5,7 @@ import {Input} from "@/components/ui/input"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select"
 
 import {FilterType} from "@/features/filter/filterTypes.ts";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {ACTION_ADD_TEXT_FILTER, ACTION_REMOVE_FILTER, FILTER_DATA_TYPE_TEXT} from "@/features/filter/filterConstants.ts";
 
 type props = {

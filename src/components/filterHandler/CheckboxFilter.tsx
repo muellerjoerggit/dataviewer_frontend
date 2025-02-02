@@ -2,7 +2,7 @@ import {Checkbox} from "@/components/ui/checkbox"
 
 import {ACTION_ADD_BOOLEAN_FILTER, FilterType} from "@/features/filter/filterTypes.ts";
 import {useContext} from "react";
-import {FilterContext} from "@/apps/DaVi/DaViApp.tsx";
+import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {FILTER_DATA_TYPE_BOOLEAN} from "@/features/filter/filterConstants.ts";
 
 type props = {

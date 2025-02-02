@@ -8,7 +8,7 @@ export default function useFetchClients() {
   useEffect(() => {
     setIsPending(true);
 
-    fetch('/api/clients/')
+    fetch('/api/clients')
       .then((res) => {
         if (!res.ok) {
           throw Error(res.statusText);
@@ -26,7 +26,6 @@ export default function useFetchClients() {
         setClients(data)
       })
       .catch(function (error) {
-        console.log(error);
         setIsPending(false);
         setError(`${error}`);
       })
