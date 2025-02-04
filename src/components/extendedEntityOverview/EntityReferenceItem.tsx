@@ -28,7 +28,7 @@ export default function EntityReferenceItem({
             {sliceText(itemData.label)}
           </div>
         </HoverCardTrigger>
-        <HoverCardContent className="w-96">
+        <HoverCardContent>
           <EntityOverviewTableComponent overviewData={itemData.entityOverview}/>
         </HoverCardContent>
       </HoverCard>
