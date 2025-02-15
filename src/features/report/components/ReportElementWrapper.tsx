@@ -1,9 +1,9 @@
 import {
-  ELEMENT_DESCRIPTION_LIST,
+  ELEMENT_LIST_DESCRIPTION,
   ELEMENT_INFO_TEXT,
-  ELEMENT_ORDERED_LIST, ELEMENT_PREFORMATTED,
+  ELEMENT_LIST_ORDERED, ELEMENT_PREFORMATTED,
   ELEMENT_RESULT,
-  ELEMENT_TABLE, ELEMENT_UNORDERED_LIST
+  ELEMENT_TABLE, ELEMENT_LIST_UNORDERED, ELEMENT_CHART_BAR
 } from "@/features/report/reportConstants.ts";
 import InfoText from "@/features/report/components/InfoText.tsx";
 import Table from "@/features/report/components/Table.tsx";
@@ -13,6 +13,7 @@ import {PreformattedText} from "@/features/report/components/element/Preformatte
 import DescriptionList from "@/features/report/components/list/DescriptionList.tsx";
 import UnorderedList from "@/features/report/components/list/UnorderedList.tsx";
 import OrderedList from "@/features/report/components/list/OrderedList.tsx";
+import {ReportBarChart} from "@/features/report/components/chart/ReportBarChart.tsx";
 
 type Props = {
   elements: ReportElement[];
@@ -37,14 +38,16 @@ export function ReportElementWrapper({elements}: Props): JSX.Element {
         return <ResultList key={index} element={element} />
       case ELEMENT_TABLE:
         return <Table key={index} element={element} />
-      case ELEMENT_ORDERED_LIST:
+      case ELEMENT_LIST_ORDERED:
         return <OrderedList key={index} element={element} />
-      case ELEMENT_UNORDERED_LIST:
+      case ELEMENT_LIST_UNORDERED:
         return <UnorderedList key={index} element={element} />
-      case ELEMENT_DESCRIPTION_LIST:
+      case ELEMENT_LIST_DESCRIPTION:
         return <DescriptionList key={index} element={element} />
       case ELEMENT_PREFORMATTED:
         return <PreformattedText key={index} element={element} />
+      case ELEMENT_CHART_BAR:
+        return <ReportBarChart key={index} element={element} />
       default:
         return <></>;
     }

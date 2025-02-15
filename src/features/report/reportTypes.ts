@@ -1,3 +1,5 @@
+import {ChartConfig} from "@/components/ui/chart.tsx";
+
 export type ReportType = {
   tableOfContent: boolean,
   body: SectionElement[],
@@ -7,7 +9,7 @@ export type ReportType = {
   }
 }
 
-export type ReportElement = InfoTextElement | ResultListElement | TableElement | UnorderedListElement | OrderedListElement | DescriptionListElement | PreformattedElement;
+export type ReportElement = InfoTextElement | ResultListElement | TableElement | UnorderedListElement | OrderedListElement | DescriptionListElement | PreformattedElement | ReportBarChartType;
 
 export type SectionElement = {
   type: 'section',
@@ -70,6 +72,21 @@ export type PreformattedElement = {
   text: string,
 }
 
+export type ReportBarChartType = {
+  type: 'barChart',
+  horizontalGrid: boolean,
+  verticalGrid: boolean,
+  gridSpacing: number,
+  xAxis: {
+    dataKey: string,
+    tickLine: boolean,
+    tickMargin: number,
+    axisLine: boolean,
+  },
+  chartConfig: ChartConfig,
+  chartData: any[],
+}
+
 export type TableHeaderList = {
   [key: string]: TableHeaderColumn,
 };
@@ -121,5 +138,7 @@ export type ReportModalItem = {
   data: Array<InfoTextElement | TableElement>
 }
 
-
-
+export type ReportIconItem = {
+  itemType: 'icon',
+  icon: string,
+}
