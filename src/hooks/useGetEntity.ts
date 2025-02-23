@@ -1,8 +1,9 @@
 import {useMemo, useState} from "react";
 import {Entity} from "@/features/entity/entityTypes.ts";
 import fetchEntity from "@/hooks/fetchEntity.ts";
+import {ExtEntityOverviewMap} from "@/features/extEntityOverview/extEntityOverviewTypes.ts";
 
-export default function useGetEntity(setEntityCallback: (entity: Entity) => void) {
+export default function useGetEntity(setEntityCallback: (entity: Entity) => void, extOverviewMap: ExtEntityOverviewMap) {
   const entityMap: Map<string, Entity> = useMemo(() => (new Map), []);
   const [loading, setLoadingState] = useState(false);
 
@@ -15,7 +16,7 @@ export default function useGetEntity(setEntityCallback: (entity: Entity) => void
     if (entity !== undefined && !reload) {
       setEntityCallback(entity);
     } else {
-      fetchEntity(entityKey, setEntityCallback, entityMap, setLoading);
+      fetchEntity(entityKey, setEntityCallback, entityMap, setLoading, extOverviewMap);
     }
   }
 

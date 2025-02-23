@@ -1,6 +1,6 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 
-export default function EntityMain({entityListComponent}
+export default function EntityMain({entityListComponent, bookmarksComponent}
 ) {
 
   return (
@@ -14,7 +14,7 @@ export default function EntityMain({entityListComponent}
         {entityListComponent}
       </TabsContent>
       <TabsContent value="bookmarks">
-        {/*{buildBookmarks()}*/}
+        {bookmarksComponent}
       </TabsContent>
       <TabsContent value="history">
         {/*{*/}

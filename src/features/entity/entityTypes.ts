@@ -2,9 +2,10 @@ import {EntityOverviewType, Item} from '@/features/property/propertyTypes.ts'
 import {LogLevels} from '@/features/logging/logTypes.ts'
 import {SqlFilterDefinition} from "@/features/filter/filterTypes.ts";
 import {EntityAction} from "@/features/entityAction/entityActionTypes.ts";
+import {ExtOverviewEntity} from "@/features/extEntityOverview/extEntityOverviewTypes.ts";
 
 
-export interface EntityType {
+export type EntityType = {
   type: string,
   label: string,
   description: string,
@@ -17,24 +18,24 @@ export type EntityList = {
   entities: Array<EntityListItem>,
   entityCount: number,
   upperBound: number,
-  lowerBound: number,
-  page: number
+  lowerBound: number
 }
 
-export interface EntityListItem {
+export type EntityListItem = {
   entityLabel: string,
   entityKey: string,
   uniqueKey: string | number
 }
 
-export interface Entity {
+export type Entity = {
   entityKey: string,
   label: string,
-  summary_entity: string,
   entityOverview: EntityOverviewType,
+  extEntityOverview: ExtOverviewEntity,
   properties: Array<Item>,
-  references: [],
   logsByLevel: LogLevels,
   entityActions: Array<EntityAction>
 }
+
+export type EntityLoad = (entityKey: string) => void;
 

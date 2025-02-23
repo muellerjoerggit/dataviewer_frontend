@@ -262,11 +262,9 @@ export function changePaginationHook(entityOverviewList: EntityList | undefined,
   if (nextPage && entityOverviewList.upperBound > 0) {
     boundKey = 'upperBound';
     boundValue = entityOverviewList.upperBound;
-    page = entityOverviewList.page + 1;
   } else if (!nextPage && entityOverviewList.lowerBound > 0) {
     boundKey = 'lowerBound';
     boundValue = entityOverviewList.lowerBound;
-    page = entityOverviewList.page - 1;
   } else {
     filterDispatcher({
       type: ACTION_REMOVE_FILTER,

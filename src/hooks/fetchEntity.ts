@@ -1,6 +1,13 @@
 import {Entity} from "@/features/entity/entityTypes.ts";
+import {ExtEntityOverviewMap} from "@/features/extEntityOverview/extEntityOverviewTypes.ts";
 
-export default function fetchEntity(entityKey: string, setEntity: Function, entityMap: Map<string, Entity> | undefined, setLoading: (loading: boolean) => void) {
+export default function fetchEntity(
+  entityKey: string,
+  setEntity: Function,
+  entityMap: Map<string, Entity> | undefined,
+  setLoading: (loading: boolean) => void,
+  extOverviewMap: ExtEntityOverviewMap
+) {
   setLoading(true);
   fetch(`/api/entities/${entityKey}`)
     .then((res) => {
@@ -15,11 +22,14 @@ export default function fetchEntity(entityKey: string, setEntity: Function, enti
         });
       }
     })
-    .then((entityData) => {
+    .then((entityData: Entity) => {
       setEntity(entityData);
-      if (entityMap != undefined) {
-        entityMap.set(entityKey, entityData);
-      }
+      entityMap?.set(entityKey, entityData);
+      extOverviewMap?.set(entityKey, {
+        entityLabel: entityData.label,
+        entityKey: entityData.entityKey,
+        extOverview: entityData.extEntityOverview
+      });
     })
     .finally(()=> {
       setLoading(false);

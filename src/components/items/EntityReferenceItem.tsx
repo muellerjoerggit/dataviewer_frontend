@@ -1,6 +1,6 @@
 import {EntityReferenceType, EntityReferenceItemData} from '@/features/property/propertyTypes.ts'
 import {HoverCard, HoverCardContent, HoverCardTrigger,} from "@/components/ui/hover-card"
-import EntityOverview from "@/components/EntityOverview.tsx";
+import EntityOverview from "@/features/entityOverview/EntityOverview.tsx";
 import EntityReference from "@/components/EntityReference.tsx";
 
 type props = {

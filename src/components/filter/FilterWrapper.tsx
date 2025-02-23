@@ -27,8 +27,10 @@ export default function FilterWrapper({filterKey}) {
   const {filterData: filterData} = useContext(FilterContext);
   const filterDefinition = filterData.filterDefinitions[filterKey];
 
+  console.log(filterData, filterKey);
+
   function buildFilter() {
-    if (filterKey === NO_FILTER) return;
+    if (filterKey === NO_FILTER || filterDefinition === undefined) return;
 
 
     switch (filterDefinition.component) {

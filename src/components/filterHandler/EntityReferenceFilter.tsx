@@ -17,7 +17,7 @@ import {FILTER_DATA_TYPE_REFERENCE, FilterType} from "@/features/filter/filterTy
 import useGetEntity from "@/hooks/useGetEntity.ts";
 import XMarkIcon from "@/components/icons/XMarkIcon.tsx";
 import {emptyEntity} from "@/features/entity/entityConstants.ts";
-import EntityOverview from "@/components/EntityOverview.tsx";
+import EntityOverview from "@/features/entityOverview/EntityOverview.tsx";
 
 type props = {
   filterName: string

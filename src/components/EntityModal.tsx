@@ -20,8 +20,8 @@ type EntityContextType = {
 
 type Props = {
   entity: Entity,
-  bookmarks: Array<string>,
-  setBookmarksCallback: ((bookmarks: Array<string>) => void),
+  isBookmarkCallback: ((entityKey: string) => boolean),
+  toggleBookmark: ((entityKey: string) => void),
   openModal: boolean,
   setOpenModal: (open: boolean) => void,
   showEntityCallback: ((entityKey: string, reload?: boolean) => void),
@@ -34,7 +34,7 @@ export const EntityContext = createContext<EntityContextType>({
   reloadEntityCallback: () => {}
 })
 
-export default function EntityModal({entity, bookmarks, setBookmarksCallback, openModal, setOpenModal, showEntityCallback, reloadEntityCallback, children}: Props) {
+export default function EntityModal({entity, isBookmarkCallback, toggleBookmark, openModal, setOpenModal, showEntityCallback, reloadEntityCallback, children}: Props) {
 
   return (
     <EntityContext.Provider value={{showEntityCallback: showEntityCallback, reloadEntityCallback: reloadEntityCallback}}>
@@ -51,7 +51,7 @@ export default function EntityModal({entity, bookmarks, setBookmarksCallback, op
             <DialogClose asChild>
               <Button type="button" variant="secondary">Schließen</Button>
             </DialogClose>
-            <Bookmark entityKey={entity.entityKey} bookmarks={bookmarks} setBookmarksCallback={setBookmarksCallback} />
+            <Bookmark entityKey={entity.entityKey} isBookmarkCallback={isBookmarkCallback} toggleBookmark={toggleBookmark} />
             <Button variant="secondary" onClick={() => reloadEntityCallback()}><ReloadIcon/><span className="ml-2">Neu Laden</span></Button>
           </DialogFooter>
         </DialogContent>

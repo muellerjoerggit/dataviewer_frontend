@@ -6,11 +6,11 @@ type Props = {
 
 export function IconWrapper({item}: Props) {
 
-  function getIcon() {
-    switch (item.itemType) {
-
-    }
-  }
+  // function getIcon() {
+  //   switch (item.itemType) {
+  //
+  //   }
+  // }
 
   return (
     <></>

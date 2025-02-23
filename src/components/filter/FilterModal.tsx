@@ -15,11 +15,11 @@ import FilterGroupList from "@/components/filter/FilterGroupList.tsx";
 import {FilterContext} from "@/components/EntityFilterWrapper.tsx";
 import {ACTION_RESET_FILTER} from "@/features/filter/filterConstants.ts";
 
-type props = {
+type Props = {
   searchEntities?: Function,
 }
 
-export default function FilterModal({searchEntities}: props) {
+export default function FilterModal({searchEntities}: Props) {
   const [filterDialogOpen, setFilterDialogOpen] = useState(false);
   const {filterData: filterData, filterDispatcherCallback: filterDispatcher} = useContext(FilterContext);
 
