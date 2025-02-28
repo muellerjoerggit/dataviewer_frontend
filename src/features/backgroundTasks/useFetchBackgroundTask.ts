@@ -102,7 +102,6 @@ export function useFetchBackgroundTask(taskId: number | undefined): ReturnValue 
         }
       })
       .then((data) => {
-        console.log(data);
         setTaskResult(data)
       })
       .catch(() => {})

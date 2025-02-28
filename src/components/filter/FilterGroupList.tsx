@@ -7,8 +7,6 @@ import FilterWrapper from "@/components/filter/FilterWrapper.tsx";
 export default function FilterGroupList() {
   const {filterData: filterData} = useContext(FilterContext);
 
-  console.log(filterData);
-
   return (
     <div className="grid grid-cols-[20%_80%] gap-y-4 mt-4">
       {

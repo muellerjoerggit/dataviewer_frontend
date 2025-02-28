@@ -24,8 +24,6 @@ export function EntityTypesBookmarks({extOverviewData, bookmarksList, loadEntity
     return data;
   }, [bookmarksList]);
 
-  console.log(extOverviewBookmarks);
-
   return (
     Object.keys(extOverviewBookmarks).map((entityType: string) => {
       if(Object.keys(extOverviewBookmarks[entityType]).length === 0) {
