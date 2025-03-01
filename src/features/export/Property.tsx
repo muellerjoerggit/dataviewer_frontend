@@ -11,11 +11,12 @@ import {
 import {Button} from "@/components/ui/button.tsx";
 import InfoIcon from "@/components/icons/InfoIcon.tsx";
 import {CARDINALITY_SINGLE} from "@/features/export/constants.ts";
+import {cn} from "@/lib/utils.ts";
 
 
-export default function Property({property, label, children}: {property: PropertyType, label?: string, children?: ReactNode[] | ReactNode}) {
+export default function Property({property, label, className, children}: {property: PropertyType, label?: string, className: string, children?: ReactNode[] | ReactNode}) {
   return (
-    <div className="flex items-center gap-1">
+    <div className={cn("flex items-center gap-1",className)}>
       <span>{label ? label : property.label}</span>
       <Dialog>
         <DialogTrigger asChild>
@@ -30,10 +31,10 @@ export default function Property({property, label, children}: {property: Propert
             <dd>{property.label}</dd>
 
             <dt>interne Bezeichnung</dt>
-            <dd>{property.key}</dd>
+            <dd>{property.properties.property}</dd>
 
             <dt>Kardinalität</dt>
-            <dd>{property.cardinality === CARDINALITY_SINGLE ? 'einzelner Wert' : 'mehrere Werte'}</dd>
+            <dd>{property.properties.cardinality === CARDINALITY_SINGLE ? 'einzelner Wert' : 'mehrere Werte'}</dd>
           </dl>
           <DialogFooter className="mt-auto sm:justify-start">
             <DialogClose asChild>

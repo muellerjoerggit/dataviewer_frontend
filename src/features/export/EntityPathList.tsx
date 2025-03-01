@@ -1,5 +1,5 @@
 import {ExportPath, ExportPathData, PathList} from "@/features/export/types.ts";
-import PropertyList from "@/features/export/PropertyList.tsx";
+import GroupList from "@/features/export/GroupList.tsx";
 import ReferenceList from "@/features/export/ReferenceList.tsx";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
 
@@ -17,7 +17,7 @@ export default function EntityPathList({entityPathList, exportConfigDispatcher, 
         <AccordionItem value="item-1" className="border-0">
           <AccordionTrigger className="justify-start" chevronStart={true} chevronEnd={false}><h2 className="ml-2">Felder</h2></AccordionTrigger>
           <AccordionContent>
-            <PropertyList exportPathData={exportPathData} exportConfigDispatcher={exportConfigDispatcher}/>
+            <GroupList groups={exportPathData.properties} path={exportPathData.path} exportConfigDispatcher={exportConfigDispatcher}/>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

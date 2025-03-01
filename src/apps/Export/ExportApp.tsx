@@ -6,7 +6,7 @@ import {useReducer, useState} from "react";
 import {changeFilter} from "@/hooks/filterReducer.ts";
 import {emptyFilterData} from "@/features/filter/filterConstants.ts";
 import useFetchExportEntityTypes from "@/hooks/useFetchExportEntityTypes.ts";
-import {changeExportConfiguration} from "@/hooks/exportReducer.ts";
+import {changeExportConfiguration} from "@/features/export/exportReducer.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {
   ExportEntityType,
@@ -27,7 +27,7 @@ export default function ExportApp() {
   const [taskId, setTaskId] = useState(undefined);
   const [entityPathList, setEntityPathList] = useState<PathList>({});
   const [filterData, filterDispatcher] = useReducer(changeFilter, JSON.parse(JSON.stringify(emptyFilterData)));
-  const [exportConfig, exportConfigDispatcher] = useReducer(changeExportConfiguration, {});
+  const [exportConfigList, exportConfigDispatcher] = useReducer(changeExportConfiguration, {});
   const {addExportEntity} = useFetchExportEntityTypes(addEntityPath);
 
   function setClient(client: string) {
@@ -50,7 +50,7 @@ export default function ExportApp() {
   }
 
   function startExport(): void {
-    fetchExport(filterData, selectedClient, currentEntityType, exportConfig, setTaskId);
+    fetchExport(filterData, selectedClient, currentEntityType, exportConfigList, setTaskId);
   }
 
   return (
@@ -70,7 +70,7 @@ export default function ExportApp() {
       </div>
       <div className="grid grid-cols-2 mt-8 gap-4">
         <EntityPathList entityPathList={entityPathList} exportConfigDispatcher={exportConfigDispatcher} addExportEntity={addExportEntity} />
-        <ExportConfig exportConfig={exportConfig} entityPathList={entityPathList} exportConfigDispatcher={exportConfigDispatcher} />
+        <ExportConfig exportConfigList={exportConfigList} entityPathList={entityPathList} exportConfigDispatcher={exportConfigDispatcher} />
       </div>
     </main>
   )

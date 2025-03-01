@@ -1,14 +1,18 @@
 
+export type PathList = {
+  [key: string]: ExportPathData
+}
+
 export type ExportPathData = {
   path: ExportPath,
   entityLabel: string,
   entityType: string,
-  properties: PropertyType[],
+  properties: ExportGroupList,
   references: ReferenceType[],
 }
 
-export type PathList = {
-  [key: string]: ExportPathData
+export type ExportGroupList = {
+  [groupKey: string]: ExportGroup
 }
 
 export type ReferenceType = {
@@ -17,11 +21,32 @@ export type ReferenceType = {
   property: string,
 };
 
-export type PropertyType = {
+export type ExportGroup = PropertyType;
+
+interface ExportGroupBase {
   key: string,
   label: string,
   description: string,
-  cardinality: number
+  groupExporterList: GroupExporterListType,
+  defaultExporter: string,
+}
+
+export interface PropertyType extends ExportGroupBase {
+  type: 1,
+  properties: {
+    property: string,
+    cardinality: number,
+  }
+}
+
+export type GroupExporterListType = {
+  [name: string]: GroupExporter
+}
+
+export type GroupExporter = {
+  name: string,
+  label: string,
+  description: string,
 }
 
 export type ExportPath = {
@@ -32,23 +57,50 @@ export type ExportPath = {
 export type ExportEntityType = {
   entityLabel: string,
   entityType: string,
-  properties: PropertyType[],
+  groups: ExportGroup[],
   references: ReferenceType[],
 }
 
-export type ExportConfigActions = ACTION_ADD_PROPERTY | ACTION_CHANGE_PROPERTY_LABEL;
+export type ExportConfigList = {
+  [path: string]: ExportConfig,
+}
 
-export type ACTION_ADD_PROPERTY = {
+export type ExportConfig = {
+  path: ExportPath,
+  groups: {
+    [uniqueKey: string]: ExportGroupConfig
+  }
+}
+
+export type ExportGroupConfig = {
+  type: number,
+  groupKey: string,
+  count: number,
+  label: string,
+  groupExporter: string,
+}
+
+export type ExportConfigActions = ActionAddProperty | ActionChangeGroupLabel | ActionChangeGroupExporter;
+
+export type ActionAddProperty = {
   type: 1,
   path: ExportPath,
+  groupExporter: string,
   propertyData: PropertyType,
 }
 
-export type ACTION_CHANGE_PROPERTY_LABEL = {
+export type ActionChangeGroupLabel = {
   type: 2,
   path: ExportPath,
   uniqueKey: string,
   label: string,
+}
+
+export type ActionChangeGroupExporter = {
+  type: 3,
+  path: ExportPath,
+  uniqueKey: string,
+  exporter: string,
 }
 
 export type ExportConfigDispatcher = (action: ExportConfigActions) => void;
