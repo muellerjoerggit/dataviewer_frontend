@@ -66,7 +66,7 @@ export default function FilterGroup({filterGroup}: props) {
             {buildOptionsList()}
           </SelectContent>
         </Select>
-        <FilterWrapper filterKey={selectedOption}/>
+        <FilterWrapper className="mt-4" filterKey={selectedOption}/>
       </div>
     </>
   )

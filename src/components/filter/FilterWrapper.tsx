@@ -23,13 +23,13 @@ import {
   NO_FILTER
 } from "@/features/filter/filterConstants.ts";
 
-export default function FilterWrapper({filterKey}) {
+export default function FilterWrapper({filterKey, className = ''}) {
   const {filterData: filterData} = useContext(FilterContext);
   const filterDefinition = filterData.filterDefinitions[filterKey];
 
-  function buildFilter() {
-    if (filterKey === NO_FILTER || filterDefinition === undefined) return;
+  if (filterKey === NO_FILTER || filterDefinition === undefined) return;
 
+  function buildFilter() {
 
     switch (filterDefinition.component) {
       case FILTER_ENTITY_REFERENCE:
@@ -100,9 +100,8 @@ export default function FilterWrapper({filterKey}) {
   }
 
   return (
-    <div className="mt-4">
+    <div className={className}>
       {buildFilter()}
     </div>
-
   )
 }
