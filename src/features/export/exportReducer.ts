@@ -22,11 +22,12 @@ export function changeExportConfiguration(state: any, action: any): any {
   switch (action.type) {
     case ADD_PROPERTY:
       const groupKey = action.propertyData.key;
+      const property = action.propertyData.properties.property;
 
       let count = 1;
       if(state[path]) {
         count = Object.keys(state[path].groups).reduce((total, key) => {
-          return state[path].groups[key]?.groupKey === groupKey ? ++total : total;
+          return state[path].groups[key]?.property === property ? ++total : total;
         }, 0);
         count++;
       }
@@ -37,8 +38,7 @@ export function changeExportConfiguration(state: any, action: any): any {
       newState[path].groups[uniqueKey] = {};
       newState[path].groups[uniqueKey].type = GROUP_TYPE_PROPERTY;
       newState[path].groups[uniqueKey].groupKey = groupKey;
-      newState[path].groups[uniqueKey].property = action.propertyData.properties.property;
-      newState[path].groups[uniqueKey].count = count;
+      newState[path].groups[uniqueKey].property = property;
       newState[path].groups[uniqueKey].label = label;
       newState[path].groups[uniqueKey].groupExporter = action.groupExporter;
       break;

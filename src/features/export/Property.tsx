@@ -14,7 +14,7 @@ import {CARDINALITY_SINGLE} from "@/features/export/constants.ts";
 import {cn} from "@/lib/utils.ts";
 
 
-export default function Property({property, label, className, children}: {property: PropertyType, label?: string, className: string, children?: ReactNode[] | ReactNode}) {
+export default function Property({property, label, className, children}: {property: PropertyType, label?: string, className?: string, children?: ReactNode[] | ReactNode}) {
   return (
     <div className={cn("flex items-center gap-1",className)}>
       <span>{label ? label : property.label}</span>

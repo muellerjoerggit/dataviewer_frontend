@@ -75,7 +75,6 @@ export type ExportConfig = {
 export type ExportGroupConfig = {
   type: number,
   groupKey: string,
-  count: number,
   label: string,
   groupExporter: string,
 }
